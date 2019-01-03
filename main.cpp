@@ -10,5 +10,6 @@ int main()
     personalBudget.displayAllUsers();
     //personalBudget.signUp();
     personalBudget.signIn();
-    personalBudget.changePassword();
+    //personalBudget.changePassword();
+    personalBudget.logOut();
 }

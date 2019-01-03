@@ -126,3 +126,8 @@ void UserManager::changePassword()
     }
     fileWithUsers.addAllUsersToFile(users);
 }
+
+void UserManager::logOut()
+{
+    loggedInUserId = 0;
+}
