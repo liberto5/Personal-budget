@@ -14,3 +14,8 @@ void PersonalBudget::signIn()
 {
     userManager.signIn();
 }
+
+void PersonalBudget::changePassword()
+{
+    userManager.changePassword();
+}

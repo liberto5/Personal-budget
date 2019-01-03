@@ -16,6 +16,7 @@ public:
     FileWithUsers(string NAMEOFFILEWITHUSERS) : nameOfFileWithUsers(NAMEOFFILEWITHUSERS) {};
     void addUserToFile(User user);
     vector<User> loadUsersFromFile();
+    void addAllUsersToFile(vector <User> &users);
 };
 
 #endif //PLIKZUZYTKOWNIKAMI_H

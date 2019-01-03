@@ -23,6 +23,7 @@ public:
     void signUp();
     void displayAllUsers();
     void signIn();
+    void changePassword();
 };
 
 #endif //USERMANAGER_H
