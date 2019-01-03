@@ -14,6 +14,7 @@ public:
     void signUp();
     void displayAllUsers();
     void signIn();
+    void changePassword();
 };
 
 #endif //PERSONALBUDGET_H

@@ -17,6 +17,24 @@ void FileWithUsers::addUserToFile(User user) {
     userFile.Save( nameOfFileWithUsers );
 }
 
+void FileWithUsers::addAllUsersToFile(vector <User> &users) {
+    CMarkup userFile;
+    userFile.AddElem( "UsersList" );
+    userFile.IntoElem();
+    userFile.FindElem();
+    userFile.IntoElem();
+    vector <User>::iterator itrEnd = --users.end();
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
+    {
+    userFile.AddElem( "Id", itr -> downloadUserId() );
+    userFile.AddElem( "Name", itr -> downloadUserName() );
+    userFile.AddElem( "Surname", itr -> downloadUserSurname() );
+    userFile.AddElem( "Login", itr -> downloadUserLogin() );
+    userFile.AddElem( "Password", itr -> downloadUserPassword() );
+    userFile.Save( nameOfFileWithUsers );
+    }
+}
+
 vector <User> FileWithUsers::loadUsersFromFile() {
     User user;
     vector<User> users;

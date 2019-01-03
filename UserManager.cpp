@@ -108,3 +108,21 @@ void UserManager::signIn()
     system("pause");
     return;
 }
+
+void UserManager::changePassword()
+{
+    string newPassword = "";
+    cout << "Enter new password: ";
+    cin >> newPassword;
+
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
+    {
+        if (itr -> downloadUserId() == loggedInUserId)
+        {
+            itr -> setUserPassword(newPassword);
+            cout << "Password has been changed." << endl << endl;
+            system("pause");
+        }
+    }
+    fileWithUsers.addAllUsersToFile(users);
+}

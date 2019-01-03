@@ -1,14 +1,14 @@
 <UsersList>
-	<Id>1</Id>
-	<Name>Adam</Name>
-	<Surname>Golub</Surname>
-	<Login>liberto5</Login>
-	<Password>password</Password>
+<Id>1</Id>
+<Name>Adam</Name>
+<Surname>Golub</Surname>
+<Login>liberto5</Login>
+<Password>password</Password>
 <Id>2</Id>
 <Name>ola</Name>
 <Surname>ola</Surname>
 <Login>ola</Login>
-<Password>ola</Password>
+<Password>olafasola</Password>
 <Id>3</Id>
 <Name>ula</Name>
 <Surname>ula</Surname>
@@ -19,9 +19,4 @@
 <Surname>pola</Surname>
 <Login>pola</Login>
 <Password>pola</Password>
-<Id>5</Id>
-<Name>iga</Name>
-<Surname>iga</Surname>
-<Login>iga</Login>
-<Password>iga</Password>
 </UsersList>
