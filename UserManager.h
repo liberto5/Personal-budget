@@ -24,6 +24,7 @@ public:
     void displayAllUsers();
     void signIn();
     void changePassword();
+    void logOut();
 };
 
 #endif //USERMANAGER_H
