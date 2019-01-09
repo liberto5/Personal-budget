@@ -24,14 +24,13 @@ void FileWithUsers::addAllUsersToFile(vector <User> &users) {
     userFile.FindElem();
     userFile.IntoElem();
     vector <User>::iterator itrEnd = --users.end();
-    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
-    {
-    userFile.AddElem( "Id", itr -> downloadUserId() );
-    userFile.AddElem( "Name", itr -> downloadUserName() );
-    userFile.AddElem( "Surname", itr -> downloadUserSurname() );
-    userFile.AddElem( "Login", itr -> downloadUserLogin() );
-    userFile.AddElem( "Password", itr -> downloadUserPassword() );
-    userFile.Save( nameOfFileWithUsers );
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
+        userFile.AddElem( "Id", itr -> downloadUserId() );
+        userFile.AddElem( "Name", itr -> downloadUserName() );
+        userFile.AddElem( "Surname", itr -> downloadUserSurname() );
+        userFile.AddElem( "Login", itr -> downloadUserLogin() );
+        userFile.AddElem( "Password", itr -> downloadUserPassword() );
+        userFile.Save( nameOfFileWithUsers );
     }
 }
 
@@ -45,8 +44,7 @@ vector <User> FileWithUsers::loadUsersFromFile() {
     userFile.IntoElem();
     while (true) {
         bool ifNextPositionExists = userFile.FindElem();
-        if (ifNextPositionExists == false)
-        {
+        if (ifNextPositionExists == false) {
             break;
         }
         string id = userFile.GetElemContent();

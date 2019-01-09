@@ -1,7 +1,6 @@
 #include "UserManager.h"
 
-void UserManager::signUp()
-{
+void UserManager::signUp() {
     User user = enterDataOfNewUser();
     users.push_back(user);
     fileWithUsers.addUserToFile(user);
@@ -9,10 +8,8 @@ void UserManager::signUp()
     system("pause");
 }
 
-void UserManager::displayAllUsers()
-{
-    for (int i = 0; i < users.size(); i++)
-    {
+void UserManager::displayAllUsers() {
+    for (int i = 0; i < users.size(); i++) {
         cout << users[i].downloadUserId() << endl;
         cout << users[i].downloadUserName() << endl;
         cout << users[i].downloadUserSurname() << endl;
@@ -21,8 +18,7 @@ void UserManager::displayAllUsers()
     }
 }
 
-User UserManager::enterDataOfNewUser()
-{
+User UserManager::enterDataOfNewUser() {
     User user;
     user.setUserId(downloadIdOfNewUser());
     string name;
@@ -38,8 +34,7 @@ User UserManager::enterDataOfNewUser()
     cin >> surname;
     user.setUserSurname(surname);
 
-    do
-    {
+    do {
         cout << "Enter login: ";
         cin >> login;
         user.setUserLogin(login);
@@ -52,20 +47,16 @@ User UserManager::enterDataOfNewUser()
     return user;
 }
 
-int UserManager::downloadIdOfNewUser()
-{
+int UserManager::downloadIdOfNewUser() {
     if (users.empty() == true)
         return 1;
     else
         return users.back().downloadUserId() + 1;
 }
 
-bool UserManager::isLoginInUse(string login)
-{
-    for (int i = 0; i < users.size(); i++)
-    {
-        if (users[i].downloadUserLogin() == login)
-        {
+bool UserManager::isLoginInUse(string login) {
+    for (int i = 0; i < users.size(); i++) {
+        if (users[i].downloadUserLogin() == login) {
             cout << endl << "Login is taken." << endl;
             return true;
         }
@@ -73,25 +64,20 @@ bool UserManager::isLoginInUse(string login)
     return false;
 }
 
-void UserManager::signIn()
-{
+void UserManager::signIn() {
     string login = "", password = "";
 
     cout << "Enter login: ";
     cin >> login;
 
     vector <User>::iterator itr = users.begin();
-    while (itr != users.end())
-    {
-        if (itr -> downloadUserLogin() == login)
-        {
-            for (int attemptsNumber = 3; attemptsNumber > 0; attemptsNumber--)
-            {
+    while (itr != users.end()) {
+        if (itr -> downloadUserLogin() == login) {
+            for (int attemptsNumber = 3; attemptsNumber > 0; attemptsNumber--) {
                 cout << "Enter password. " << attemptsNumber << " attempts left: ";
                 cin >> password;
 
-                if (itr -> downloadUserPassword() == password)
-                {
+                if (itr -> downloadUserPassword() == password) {
                     cout << endl << "You are logged in." << endl << endl;
                     loggedInUserId = itr -> downloadUserId();
                     system("pause");
@@ -109,16 +95,13 @@ void UserManager::signIn()
     return;
 }
 
-void UserManager::changePassword()
-{
+void UserManager::changePassword() {
     string newPassword = "";
     cout << "Enter new password: ";
     cin >> newPassword;
 
-    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
-    {
-        if (itr -> downloadUserId() == loggedInUserId)
-        {
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
+        if (itr -> downloadUserId() == loggedInUserId) {
             itr -> setUserPassword(newPassword);
             cout << "Password has been changed." << endl << endl;
             system("pause");
@@ -127,7 +110,17 @@ void UserManager::changePassword()
     fileWithUsers.addAllUsersToFile(users);
 }
 
-void UserManager::logOut()
-{
+void UserManager::logOut() {
     loggedInUserId = 0;
+}
+
+bool UserManager::isUserLoggedIn() {
+    if (loggedInUserId > 0)
+        return true;
+    else
+        return false;
+}
+
+int UserManager::downloadIdOfLoggedInUser() {
+    return loggedInUserId;
 }

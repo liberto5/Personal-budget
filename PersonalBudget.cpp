@@ -1,26 +1,44 @@
 #include "PersonalBudget.h"
 
-void PersonalBudget::signUp()
-{
+void PersonalBudget::signUp() {
     userManager.signUp();
 }
 
-void PersonalBudget::displayAllUsers()
-{
+void PersonalBudget::displayAllUsers() {
     userManager.displayAllUsers();
 }
 
-void PersonalBudget::signIn()
-{
+void PersonalBudget::signIn() {
     userManager.signIn();
+    if (userManager.isUserLoggedIn()) {
+        financialOperationsManager = new FinancialOperationsManager (nameOfTheFileWithIncomes, nameOfTheFileWithExpenses, userManager.downloadIdOfLoggedInUser());
+    }
 }
 
-void PersonalBudget::changePassword()
-{
+void PersonalBudget::changePassword() {
     userManager.changePassword();
 }
 
-void PersonalBudget::logOut()
-{
+void PersonalBudget::logOut() {
     userManager.logOut();
+    delete financialOperationsManager;
+    financialOperationsManager = NULL;
+}
+
+void PersonalBudget::addIncome() {
+    if (userManager.isUserLoggedIn()) {
+        financialOperationsManager->addIncome();
+    } else {
+        cout << "Log in to add income." << endl;
+        system("pause");
+    }
+}
+
+void PersonalBudget::addExpense() {
+    if (userManager.isUserLoggedIn()) {
+        financialOperationsManager->addExpense();
+    } else {
+        cout << "Log in to add expense." << endl;
+        system("pause");
+    }
 }
