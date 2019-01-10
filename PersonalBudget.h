@@ -21,6 +21,8 @@ public:
     ~PersonalBudget() {
         delete financialOperationsManager;
     }
+
+    bool isUserLoggedIn();
     void signUp();
     void displayAllUsers();
     void signIn();
@@ -30,6 +32,7 @@ public:
     void addExpense();
     void showBalanceFromTheCurrentMonth();
     void showBalanceFromThePreviousMonth();
+    void showBalanceFromPeriod();
 };
 
 #endif //PERSONALBUDGET_H
