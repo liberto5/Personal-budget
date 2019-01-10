@@ -174,9 +174,37 @@ void FinancialOperationsManager::showBalanceFromTheCurrentMonth() {
     cout << "---------------------------" << endl;
     cout << "TOTAL EXPENSES: " << totalExpenses << endl << endl;
     double balanceFromCurrentMonth = sumIncomesAndExpenses(totalIncomes, totalExpenses);
-    cout << "-----------------------------------" << endl;
+    cout << "-------------------------------------" << endl;
     cout << "BALANCE FROM CURRENT MONTH: " << balanceFromCurrentMonth << endl;
-    cout << "-----------------------------------" << endl;
+    cout << "-------------------------------------" << endl;
+}
+
+void FinancialOperationsManager::showBalanceFromThePreviousMonth() {
+    cout << setprecision (2);
+    cout << fixed;
+    vector <Income> incomesFromPreviousMonth;
+    vector <Income> sortedIncomesFromPreviousMonth;
+    system("cls");
+    incomesFromPreviousMonth = loadIncomesOnlyFromPreviousMonth();
+    sortedIncomesFromPreviousMonth = sortIncomesFromSelectedPeriodOfTime(incomesFromPreviousMonth);
+    displayIncomesFromSelectedPeriodOfTime(sortedIncomesFromPreviousMonth);
+    double totalIncomes;
+    totalIncomes = sumIncomes(incomesFromPreviousMonth);
+    cout << "---------------------------" << endl;
+    cout << "TOTAL INCOMES: " << totalIncomes << endl;
+    vector <Expense> expensesFromPreviousMonth;
+    vector <Expense> sortedExpensesFromPreviousMonth;
+    expensesFromPreviousMonth = loadExpensesOnlyFromPreviousMonth();
+    sortedExpensesFromPreviousMonth = sortExpensesFromSelectedPeriodOfTime(expensesFromPreviousMonth);
+    displayExpensesFromSelectedPeriodOfTime(sortedExpensesFromPreviousMonth);
+    double totalExpenses;
+    totalExpenses = sumExpenses(expensesFromPreviousMonth);
+    cout << "---------------------------" << endl;
+    cout << "TOTAL EXPENSES: " << totalExpenses << endl << endl;
+    double balanceFromPreviousMonth = sumIncomesAndExpenses(totalIncomes, totalExpenses);
+    cout << "-------------------------------------" << endl;
+    cout << "BALANCE FROM PREVIOUS MONTH: " << balanceFromPreviousMonth << endl;
+    cout << "-------------------------------------" << endl;
 }
 
 vector <Income> FinancialOperationsManager::loadIncomesOnlyFromCurrentMonth() {
@@ -201,6 +229,74 @@ vector <Income> FinancialOperationsManager::loadIncomesOnlyFromCurrentMonth() {
         itr++;
     }
     return incomesOnlyFromCurrentMonth;
+}
+
+vector <Income> FinancialOperationsManager::loadIncomesOnlyFromPreviousMonth() {
+    Income income;
+    vector <Income> incomesOnlyFromPreviousMonth;
+    int yearForPreviousMonth = auxiliaryMethods.downloadCurrentYear();
+    int currentMonth = auxiliaryMethods.downloadCurrentMonth();
+    int previousMonth;
+    if (currentMonth == 1)
+    {
+        previousMonth = 12;
+        yearForPreviousMonth--;
+    }
+    else
+    {
+        previousMonth = currentMonth - 1;
+    }
+    vector <Income>::iterator itr = incomes.begin();
+    while (itr != incomes.end()) {
+        string date = itr -> downloadDate();
+        int yearFromUsersDate = auxiliaryMethods.downloadYearFromOperationDate(date);
+        int monthFromUsersDate = auxiliaryMethods.downloadMonthFromOperationDate(date);
+        if (yearFromUsersDate == yearForPreviousMonth && monthFromUsersDate == previousMonth) {
+            income.setIncomeId(itr -> downloadIncomeId());
+            income.setUserId(itr -> downloadUserId());
+            income.setDate(itr -> downloadDate());
+            income.setItem(itr -> downloadItem());
+            income.setAmount(itr -> downloadAmount());
+            income.setDateAsUnixTime(auxiliaryMethods.changeDateFormatForUnixTime(itr -> downloadDate()));
+            incomesOnlyFromPreviousMonth.push_back(income);
+        }
+        itr++;
+    }
+    return incomesOnlyFromPreviousMonth;
+}
+
+vector <Expense> FinancialOperationsManager::loadExpensesOnlyFromPreviousMonth() {
+    Expense expense;
+    vector <Expense> expensesOnlyFromPreviousMonth;
+    int yearForPreviousMonth = auxiliaryMethods.downloadCurrentYear();
+    int currentMonth = auxiliaryMethods.downloadCurrentMonth();
+    int previousMonth;
+    if (currentMonth == 1)
+    {
+        previousMonth = 12;
+        yearForPreviousMonth--;
+    }
+    else
+    {
+        previousMonth = currentMonth - 1;
+    }
+    vector <Expense>::iterator itr = expenses.begin();
+    while (itr != expenses.end()) {
+        string date = itr -> downloadDate();
+        int yearFromUsersDate = auxiliaryMethods.downloadYearFromOperationDate(date);
+        int monthFromUsersDate = auxiliaryMethods.downloadMonthFromOperationDate(date);
+        if (yearFromUsersDate == yearForPreviousMonth && monthFromUsersDate == previousMonth) {
+            expense.setExpenseId(itr -> downloadExpenseId());
+            expense.setUserId(itr -> downloadUserId());
+            expense.setDate(itr -> downloadDate());
+            expense.setItem(itr -> downloadItem());
+            expense.setAmount(itr -> downloadAmount());
+            expense.setDateAsUnixTime(auxiliaryMethods.changeDateFormatForUnixTime(itr -> downloadDate()));
+            expensesOnlyFromPreviousMonth.push_back(expense);
+        }
+        itr++;
+    }
+    return expensesOnlyFromPreviousMonth;
 }
 
 vector <Expense> FinancialOperationsManager::loadExpensesOnlyFromCurrentMonth() {

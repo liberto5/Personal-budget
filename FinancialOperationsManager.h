@@ -39,8 +39,11 @@ public:
     double checkFormatAndChangeIntoDouble (string amount);
     string loadText();
     void showBalanceFromTheCurrentMonth();
+    void showBalanceFromThePreviousMonth();
     vector <Income> loadIncomesOnlyFromCurrentMonth();
+    vector <Income> loadIncomesOnlyFromPreviousMonth();
     vector <Expense> loadExpensesOnlyFromCurrentMonth();
+    vector <Expense> loadExpensesOnlyFromPreviousMonth();
     vector <Income> sortIncomesFromSelectedPeriodOfTime(vector <Income> incomes);
     vector <Expense> sortExpensesFromSelectedPeriodOfTime(vector <Expense> expenses);
     void displayIncomesFromSelectedPeriodOfTime(vector <Income> incomes);

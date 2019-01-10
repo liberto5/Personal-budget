@@ -51,3 +51,12 @@ void PersonalBudget::showBalanceFromTheCurrentMonth(){
         system("pause");
     }
 }
+
+void PersonalBudget::showBalanceFromThePreviousMonth(){
+    if (userManager.isUserLoggedIn()) {
+        financialOperationsManager->showBalanceFromThePreviousMonth();
+    } else {
+        cout << "Log in to show user's balance." << endl;
+        system("pause");
+    }
+}
