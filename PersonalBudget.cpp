@@ -1,5 +1,10 @@
 #include "PersonalBudget.h"
 
+bool PersonalBudget::isUserLoggedIn()
+{
+    userManager.isUserLoggedIn();
+}
+
 void PersonalBudget::signUp() {
     userManager.signUp();
 }
@@ -55,6 +60,15 @@ void PersonalBudget::showBalanceFromTheCurrentMonth(){
 void PersonalBudget::showBalanceFromThePreviousMonth(){
     if (userManager.isUserLoggedIn()) {
         financialOperationsManager->showBalanceFromThePreviousMonth();
+    } else {
+        cout << "Log in to show user's balance." << endl;
+        system("pause");
+    }
+}
+
+void PersonalBudget::showBalanceFromPeriod(){
+    if (userManager.isUserLoggedIn()) {
+        financialOperationsManager->showBalanceFromPeriod();
     } else {
         cout << "Log in to show user's balance." << endl;
         system("pause");

@@ -40,10 +40,13 @@ public:
     string loadText();
     void showBalanceFromTheCurrentMonth();
     void showBalanceFromThePreviousMonth();
+    void showBalanceFromPeriod();
     vector <Income> loadIncomesOnlyFromCurrentMonth();
     vector <Income> loadIncomesOnlyFromPreviousMonth();
+    vector <Income> loadIncomesOnlyFromPeriod(string startDate, string endDate);
     vector <Expense> loadExpensesOnlyFromCurrentMonth();
     vector <Expense> loadExpensesOnlyFromPreviousMonth();
+    vector <Expense> loadExpensesOnlyFromPeriod(string startDate, string endDate);
     vector <Income> sortIncomesFromSelectedPeriodOfTime(vector <Income> incomes);
     vector <Expense> sortExpensesFromSelectedPeriodOfTime(vector <Expense> expenses);
     void displayIncomesFromSelectedPeriodOfTime(vector <Income> incomes);
