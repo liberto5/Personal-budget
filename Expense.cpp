@@ -13,7 +13,7 @@ void Expense::setDate (string newDate) {
 void Expense::setItem (string newItem) {
     item = newItem;
 }
-void Expense::setAmount (int newAmount) {
+void Expense::setAmount (double newAmount) {
     amount = newAmount;
 }
 void Expense::setDateAsUnixTime (int newDateAsUnixTime) {
@@ -32,7 +32,7 @@ string Expense::downloadDate() {
 string Expense::downloadItem() {
     return item;
 }
-int Expense::downloadAmount() {
+double Expense::downloadAmount() {
     return amount;
 }
 int Expense::downloadDateAsUnixTime() const {

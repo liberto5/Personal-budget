@@ -9,7 +9,7 @@ class Expense {
     int userId;
     string date;
     string item;
-    int amount;
+    double amount;
     int dateAsUnixTime;
 
 public:
@@ -17,14 +17,14 @@ public:
     void setUserId (int newUserId);
     void setDate (string newDate);
     void setItem (string newItem);
-    void setAmount (int newAmount);
+    void setAmount (double newAmount);
     void setDateAsUnixTime (int newDateAsUnixTime);
 
     int downloadExpenseId();
     int downloadUserId();
     string downloadDate();
     string downloadItem();
-    int downloadAmount();
+    double downloadAmount();
     int downloadDateAsUnixTime() const;
 };
 

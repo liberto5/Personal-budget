@@ -2,9 +2,12 @@
 #define FILEWITHINCOMES_H
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 #include "Income.h"
 #include "Markup.h"
+
+using namespace std;
 
 class FileWithIncomes {
     const string nameOfTheFileWithIncomes;

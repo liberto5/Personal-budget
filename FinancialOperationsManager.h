@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
 
 #include "Income.h"
 #include "Expense.h"
@@ -35,6 +36,7 @@ public:
     string setTheDateOfTheFinancialOperation (char choice);
     Income addDetailsOfTheIncome(string dateOfTheExpense);
     Expense addDetailsOfTheExpense(string dateOfTheExpense);
+    double checkFormatAndChangeIntoDouble (string amount);
     string loadText();
     void showBalanceFromTheCurrentMonth();
     vector <Income> loadIncomesOnlyFromCurrentMonth();
@@ -43,6 +45,9 @@ public:
     vector <Expense> sortExpensesFromSelectedPeriodOfTime(vector <Expense> expenses);
     void displayIncomesFromSelectedPeriodOfTime(vector <Income> incomes);
     void displayExpensesFromSelectedPeriodOfTime(vector <Expense> expenses);
+    double sumIncomes (vector <Income> incomes);
+    double sumExpenses (vector <Expense> expenses);
+    double sumIncomesAndExpenses (double incomes, double expenses);
 };
 
 #endif //FINANCIALOPERATIONSMANAGER_H

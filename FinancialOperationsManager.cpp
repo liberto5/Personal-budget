@@ -16,6 +16,7 @@ void FinancialOperationsManager::addIncome() {
         incomes.push_back(income);
         fileWithIncomes.addIncomeToFile(income);
         cout << "Income has been added." << endl;
+        system("pause");
     }
 }
 
@@ -35,6 +36,7 @@ void FinancialOperationsManager::addExpense() {
         expenses.push_back(expense);
         fileWithExpenses.addExpenseToFile(expense);
         cout << "Expense has been added." << endl;
+        system("pause");
     }
 }
 
@@ -72,7 +74,7 @@ char FinancialOperationsManager::loadChar() {
 Income FinancialOperationsManager::addDetailsOfTheIncome(string dateOfTheExpense) {
     Income income;
     string nameOfTheIncome;
-    int amountOfIncome;
+    string amountOfIncome;
 
     income.setIncomeId(fileWithIncomes.getTheIdOfLastIncome() + 1);
 
@@ -86,9 +88,46 @@ Income FinancialOperationsManager::addDetailsOfTheIncome(string dateOfTheExpense
 
     cout << "Enter amount: ";
     cin >> amountOfIncome;
-    income.setAmount(amountOfIncome);
+    double amountOfIncomeAsDouble = checkFormatAndChangeIntoDouble(amountOfIncome);
+    income.setAmount(amountOfIncomeAsDouble);
 
     return income;
+}
+
+Expense FinancialOperationsManager::addDetailsOfTheExpense(string dateOfTheExpense) {
+    Expense expense;
+    string nameOfTheExpense;
+    string amountOfExpense;
+
+    expense.setExpenseId(fileWithExpenses.getTheIdOfLastExpense() + 1);
+
+    expense.setUserId(loggedInUserId);
+
+    expense.setDate(dateOfTheExpense);
+
+    cout << "Enter name of the expense: ";
+    nameOfTheExpense = loadText();
+    expense.setItem(nameOfTheExpense);
+
+    cout << "Enter amount: ";
+    cin >> amountOfExpense;
+    double amountOfExpenseAsDouble = checkFormatAndChangeIntoDouble(amountOfExpense);
+    expense.setAmount(amountOfExpenseAsDouble);
+
+    return expense;
+}
+
+double FinancialOperationsManager::checkFormatAndChangeIntoDouble (string amount)
+{
+    size_t i = amount.find(",");
+    if (i != string::npos)
+        amount.replace(i,1,".");
+    stringstream ss;
+    double amountAsADouble;
+    ss << amount;
+    ss >> amountAsADouble;
+
+    return amountAsADouble;
 }
 
 string FinancialOperationsManager::setTheDateOfTheFinancialOperation (char choice) {
@@ -105,28 +144,6 @@ string FinancialOperationsManager::setTheDateOfTheFinancialOperation (char choic
     }
 }
 
-Expense FinancialOperationsManager::addDetailsOfTheExpense(string dateOfTheExpense) {
-    Expense expense;
-    string nameOfTheExpense;
-    int amountOfExpense;
-
-    expense.setExpenseId(fileWithExpenses.getTheIdOfLastExpense() + 1);
-
-    expense.setUserId(loggedInUserId);
-
-    expense.setDate(dateOfTheExpense);
-
-    cout << "Enter name of the expense: ";
-    nameOfTheExpense = loadText();
-    expense.setItem(nameOfTheExpense);
-
-    cout << "Enter amount: ";
-    cin >> amountOfExpense;
-    expense.setAmount(amountOfExpense);
-
-    return expense;
-}
-
 string FinancialOperationsManager::loadText() {
     string text;
     cin.sync();
@@ -135,17 +152,31 @@ string FinancialOperationsManager::loadText() {
 }
 
 void FinancialOperationsManager::showBalanceFromTheCurrentMonth() {
+    cout << setprecision (2);
+    cout << fixed;
     vector <Income> incomesFromCurrentMonth;
     vector <Income> sortedIncomesFromCurrentMonth;
     system("cls");
     incomesFromCurrentMonth = loadIncomesOnlyFromCurrentMonth();
     sortedIncomesFromCurrentMonth = sortIncomesFromSelectedPeriodOfTime(incomesFromCurrentMonth);
     displayIncomesFromSelectedPeriodOfTime(sortedIncomesFromCurrentMonth);
+    double totalIncomes;
+    totalIncomes = sumIncomes(incomesFromCurrentMonth);
+    cout << "---------------------------" << endl;
+    cout << "TOTAL INCOMES: " << totalIncomes << endl;
     vector <Expense> expensesFromCurrentMonth;
     vector <Expense> sortedExpensesFromCurrentMonth;
     expensesFromCurrentMonth = loadExpensesOnlyFromCurrentMonth();
     sortedExpensesFromCurrentMonth = sortExpensesFromSelectedPeriodOfTime(expensesFromCurrentMonth);
     displayExpensesFromSelectedPeriodOfTime(sortedExpensesFromCurrentMonth);
+    double totalExpenses;
+    totalExpenses = sumExpenses(expensesFromCurrentMonth);
+    cout << "---------------------------" << endl;
+    cout << "TOTAL EXPENSES: " << totalExpenses << endl << endl;
+    double balanceFromCurrentMonth = sumIncomesAndExpenses(totalIncomes, totalExpenses);
+    cout << "-----------------------------------" << endl;
+    cout << "BALANCE FROM CURRENT MONTH: " << balanceFromCurrentMonth << endl;
+    cout << "-----------------------------------" << endl;
 }
 
 vector <Income> FinancialOperationsManager::loadIncomesOnlyFromCurrentMonth() {
@@ -210,20 +241,42 @@ vector <Expense> FinancialOperationsManager::sortExpensesFromSelectedPeriodOfTim
 
 void FinancialOperationsManager::displayIncomesFromSelectedPeriodOfTime(vector <Income> incomes)
 {
-    cout << "----------INCOMES----------" << endl << endl;
+    cout << "----------INCOMES----------" << endl;
     for(int i = 0; i < incomes.size(); i++) {
-        cout<<incomes.at(i).downloadDate()<<" "<<incomes.at(i).downloadItem()<< " " <<incomes.at(i).downloadAmount()<< '\n';
+        cout<<incomes.at(i).downloadDate()<<" "<<incomes.at(i).downloadItem()<< " " <<incomes.at(i).downloadAmount()<< endl;
     }
-    cout << endl;
 }
 
 void FinancialOperationsManager::displayExpensesFromSelectedPeriodOfTime(vector <Expense> expenses)
 {
-    cout << "---------EXPENSES---------" << endl << endl;
+    cout << endl << "---------EXPENSES----------" << endl;
     for(int i = 0; i < expenses.size(); i++) {
         cout<<expenses.at(i).downloadDate()<<" "<<expenses.at(i).downloadItem()<< " " <<expenses.at(i).downloadAmount()<< '\n';
     }
-    system("pause");
+}
+
+double FinancialOperationsManager::sumIncomes (vector <Income> incomes)
+{
+    double totalIncomes = 0;
+    for(int i = 0; i < incomes.size(); i++) {
+        totalIncomes += incomes.at(i).downloadAmount();
+    }
+    return totalIncomes;
+}
+
+double FinancialOperationsManager::sumExpenses (vector <Expense> expenses)
+{
+    double totalExpenses = 0;
+    for(int i = 0; i < expenses.size(); i++) {
+        totalExpenses += expenses.at(i).downloadAmount();
+    }
+    return totalExpenses;
+}
+
+double FinancialOperationsManager::sumIncomesAndExpenses (double incomes, double expenses)
+{
+    double balance = incomes - expenses;
+    return balance;
 }
 
 bool operator<(const Income &i1, const Income &i2) {
