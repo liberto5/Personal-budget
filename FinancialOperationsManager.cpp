@@ -8,7 +8,7 @@ void FinancialOperationsManager::addIncome() {
     choice = chooseTypeOfDateFromMenu();
     date = setTheDateOfTheFinancialOperation(choice);
     if (date == "0") {
-        cout << "The date is incorrect.";
+        cout << "The date is incorrect." << endl;
         system("pause");
         return;
     } else {
@@ -161,7 +161,7 @@ void FinancialOperationsManager::showBalanceFromTheCurrentMonth() {
     displayIncomesFromSelectedPeriodOfTime(sortedIncomesFromCurrentMonth);
     double totalIncomes;
     totalIncomes = sumIncomes(incomesFromCurrentMonth);
-    cout << "---------------------------" << endl;
+    cout << "---------------------------------------" << endl;
     cout << "TOTAL INCOMES: " << totalIncomes << endl;
     vector <Expense> expensesFromCurrentMonth;
     vector <Expense> sortedExpensesFromCurrentMonth;
@@ -170,12 +170,13 @@ void FinancialOperationsManager::showBalanceFromTheCurrentMonth() {
     displayExpensesFromSelectedPeriodOfTime(sortedExpensesFromCurrentMonth);
     double totalExpenses;
     totalExpenses = sumExpenses(expensesFromCurrentMonth);
-    cout << "---------------------------" << endl;
+    cout << "---------------------------------------" << endl;
     cout << "TOTAL EXPENSES: " << totalExpenses << endl << endl;
     double balanceFromCurrentMonth = sumIncomesAndExpenses(totalIncomes, totalExpenses);
-    cout << "-------------------------------------" << endl;
+    cout << "---------------------------------------" << endl;
     cout << "BALANCE FROM CURRENT MONTH: " << balanceFromCurrentMonth << endl;
-    cout << "-------------------------------------" << endl;
+    cout << "---------------------------------------" << endl;
+    system("pause");
 }
 
 void FinancialOperationsManager::showBalanceFromThePreviousMonth() {
@@ -189,7 +190,7 @@ void FinancialOperationsManager::showBalanceFromThePreviousMonth() {
     displayIncomesFromSelectedPeriodOfTime(sortedIncomesFromPreviousMonth);
     double totalIncomes;
     totalIncomes = sumIncomes(incomesFromPreviousMonth);
-    cout << "---------------------------" << endl;
+    cout << "---------------------------------------" << endl;
     cout << "TOTAL INCOMES: " << totalIncomes << endl;
     vector <Expense> expensesFromPreviousMonth;
     vector <Expense> sortedExpensesFromPreviousMonth;
@@ -198,12 +199,13 @@ void FinancialOperationsManager::showBalanceFromThePreviousMonth() {
     displayExpensesFromSelectedPeriodOfTime(sortedExpensesFromPreviousMonth);
     double totalExpenses;
     totalExpenses = sumExpenses(expensesFromPreviousMonth);
-    cout << "---------------------------" << endl;
+    cout << "---------------------------------------" << endl;
     cout << "TOTAL EXPENSES: " << totalExpenses << endl << endl;
     double balanceFromPreviousMonth = sumIncomesAndExpenses(totalIncomes, totalExpenses);
-    cout << "-------------------------------------" << endl;
+    cout << "---------------------------------------" << endl;
     cout << "BALANCE FROM PREVIOUS MONTH: " << balanceFromPreviousMonth << endl;
-    cout << "-------------------------------------" << endl;
+    cout << "---------------------------------------" << endl;
+    system("pause");
 }
 
 void FinancialOperationsManager::showBalanceFromPeriod() {
@@ -221,24 +223,25 @@ void FinancialOperationsManager::showBalanceFromPeriod() {
     double balanceFromPeriod;
     incomesFromPeriod = loadIncomesOnlyFromPeriod(startDate, endDate);
     expensesFromPeriod = loadExpensesOnlyFromPeriod(startDate, endDate);
-    system("cls");
     if ((incomesFromPeriod.empty() == false) && (expensesFromPeriod.empty() == false)) {
+        system("cls");
         vector <Income> sortedIncomesFromPeriod;
         sortedIncomesFromPeriod = sortIncomesFromSelectedPeriodOfTime(incomesFromPeriod);
         displayIncomesFromSelectedPeriodOfTime(sortedIncomesFromPeriod);
         totalIncomes = sumIncomes(incomesFromPeriod);
-        cout << "---------------------------" << endl;
+        cout << "---------------------------------------" << endl;
         cout << "TOTAL INCOMES: " << totalIncomes << endl;
         vector <Expense> sortedExpensesFromPeriod;
         sortedExpensesFromPeriod = sortExpensesFromSelectedPeriodOfTime(expensesFromPeriod);
         displayExpensesFromSelectedPeriodOfTime(sortedExpensesFromPeriod);
         totalExpenses = sumExpenses(expensesFromPeriod);
-        cout << "---------------------------" << endl;
+        cout << "---------------------------------------" << endl;
         cout << "TOTAL EXPENSES: " << totalExpenses << endl << endl;
         balanceFromPeriod = sumIncomesAndExpenses(totalIncomes, totalExpenses);
         cout << "---------------------------------------" << endl;
-        cout << "BALANCE FROM PREVIOUS MONTH: " << balanceFromPeriod << endl;
+        cout << "BALANCE FROM SELECTED PERIOD: " << balanceFromPeriod << endl;
         cout << "---------------------------------------" << endl;
+        system("pause");
     } else {
         cout << "No data to display. Please check dates for selected period." << endl;
         system("pause");
@@ -457,12 +460,3 @@ bool operator<(const Income &i1, const Income &i2) {
 bool operator<(const Expense &e1, const Expense &e2) {
     return e1.downloadDateAsUnixTime() < e2.downloadDateAsUnixTime();
 }
-
-
-
-
-
-
-
-
-

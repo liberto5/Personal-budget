@@ -3,8 +3,6 @@
 #include <iostream>
 
 #include "UserManager.h"
-#include "FileWithIncomes.h"
-#include "FileWithExpenses.h"
 #include "FinancialOperationsManager.h"
 
 using namespace std;
