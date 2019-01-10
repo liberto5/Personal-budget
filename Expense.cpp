@@ -16,6 +16,9 @@ void Expense::setItem (string newItem) {
 void Expense::setAmount (int newAmount) {
     amount = newAmount;
 }
+void Expense::setDateAsUnixTime (int newDateAsUnixTime) {
+    dateAsUnixTime = newDateAsUnixTime;
+}
 
 int Expense::downloadExpenseId() {
     return expenseId;
@@ -31,4 +34,7 @@ string Expense::downloadItem() {
 }
 int Expense::downloadAmount() {
     return amount;
+}
+int Expense::downloadDateAsUnixTime() const {
+    return dateAsUnixTime;
 }

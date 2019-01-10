@@ -37,6 +37,12 @@ public:
     Expense addDetailsOfTheExpense(string dateOfTheExpense);
     string loadText();
     void showBalanceFromTheCurrentMonth();
+    vector <Income> loadIncomesOnlyFromCurrentMonth();
+    vector <Expense> loadExpensesOnlyFromCurrentMonth();
+    vector <Income> sortIncomesFromSelectedPeriodOfTime(vector <Income> incomes);
+    vector <Expense> sortExpensesFromSelectedPeriodOfTime(vector <Expense> expenses);
+    void displayIncomesFromSelectedPeriodOfTime(vector <Income> incomes);
+    void displayExpensesFromSelectedPeriodOfTime(vector <Expense> expenses);
 };
 
 #endif //FINANCIALOPERATIONSMANAGER_H
