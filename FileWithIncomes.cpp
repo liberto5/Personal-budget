@@ -26,8 +26,11 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedInUserFromFile(int loggedInU
         income.setItem(item);
         incomesFile.FindElem();
         string amountAsAString = incomesFile.GetElemContent();
-        int amount = atoi(amountAsAString.c_str());
-        income.setAmount(amount);
+        stringstream ss;
+        double amountAsADouble;
+        ss << amountAsAString;
+        ss >> amountAsADouble;
+        income.setAmount(amountAsADouble);
         idOfLastIncome++;
         if (loggedInUserId == income.downloadUserId()) {
             incomes.push_back(income);
@@ -53,6 +56,9 @@ void FileWithIncomes::addIncomeToFile(Income income) {
     incomesFile.AddElem( "userId", income.downloadUserId() );
     incomesFile.AddElem( "date", income.downloadDate() );
     incomesFile.AddElem( "item", income.downloadItem() );
-    incomesFile.AddElem( "amount", income.downloadAmount() );
+    ostringstream strs;
+    strs << income.downloadAmount();
+    string amountAsString = strs.str();
+    incomesFile.AddElem( "amount", amountAsString );
     incomesFile.Save( nameOfTheFileWithIncomes );
 }

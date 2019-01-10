@@ -26,8 +26,11 @@ vector <Expense> FileWithExpenses::loadExpensesOfLoggedInUserFromFile(int logged
         expense.setItem(item);
         expensesFile.FindElem();
         string amountAsAString = expensesFile.GetElemContent();
-        int amount = atoi(amountAsAString.c_str());
-        expense.setAmount(amount);
+        stringstream ss;
+        double amountAsADouble;
+        ss << amountAsAString;
+        ss >> amountAsADouble;
+        expense.setAmount(amountAsADouble);
         idOfLastExpense++;
         if (loggedInUserId == expense.downloadUserId()) {
             expenses.push_back(expense);
@@ -53,6 +56,9 @@ void FileWithExpenses::addExpenseToFile(Expense expense) {
     expensesFile.AddElem( "userId", expense.downloadUserId() );
     expensesFile.AddElem( "date", expense.downloadDate() );
     expensesFile.AddElem( "item", expense.downloadItem() );
-    expensesFile.AddElem( "amount", expense.downloadAmount() );
+    ostringstream strs;
+    strs << expense.downloadAmount();
+    string amountAsString = strs.str();
+    expensesFile.AddElem( "amount", amountAsString );
     expensesFile.Save( nameOfTheFileWithExpenses );
 }

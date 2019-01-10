@@ -2,9 +2,12 @@
 #define FILEWITHEXPENSES_H
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 #include "Expense.h"
 #include "Markup.h"
+
+using namespace std;
 
 class FileWithExpenses {
     const string nameOfTheFileWithExpenses;
