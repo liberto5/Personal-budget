@@ -16,6 +16,9 @@ void Income::setItem (string newItem) {
 void Income::setAmount (int newAmount) {
     amount = newAmount;
 }
+void Income::setDateAsUnixTime (int newDateAsUnixTime) {
+    dateAsUnixTime = newDateAsUnixTime;
+}
 
 int Income::downloadIncomeId() {
     return incomeId;
@@ -31,4 +34,7 @@ string Income::downloadItem() {
 }
 int Income::downloadAmount() {
     return amount;
+}
+int Income::downloadDateAsUnixTime() const {
+    return dateAsUnixTime;
 }

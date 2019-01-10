@@ -21,8 +21,6 @@ string AuxiliaryMethods::setCurrentDateOfTheOperation() {
     return currentDateAsAString;
 }
 
-
-
 string AuxiliaryMethods::setUsersDateOfTheOperation() {
     cout << "Please enter the date (yyyy-mm-dd): ";
     string date;
@@ -96,5 +94,73 @@ bool AuxiliaryMethods::checkTheFormatOfTheDate(int yearAsAnInteger, int monthAsA
     }
     return hasTheDateCorrectFormat;
 }
+
+time_t AuxiliaryMethods::changeDateFormatForUnixTime (string date)
+{
+    tm time;
+    string year = date.substr( 0, 4);
+    int yearAsAnInteger;
+    istringstream strYear(year);
+    strYear >> yearAsAnInteger;
+    time.tm_year = yearAsAnInteger-1900;
+    string month = date.substr( 5, 2);
+    int monthAsAnInteger;
+    istringstream strMonth(month);
+    strMonth >> monthAsAnInteger;
+    time.tm_mon = monthAsAnInteger-1;
+    string day = date.substr( 8, 2);
+    int dayAsAnInteger;
+    istringstream strDay(day);
+    strDay >> dayAsAnInteger;
+    time.tm_mday = dayAsAnInteger;
+    time.tm_hour = 0;
+    time.tm_min = 0;
+    time.tm_sec = 0;
+    time_t timestamp = mktime(&time);
+
+    return timestamp;
+}
+
+int AuxiliaryMethods::downloadCurrentYear() {
+    SYSTEMTIME localTime;
+    GetLocalTime(&localTime);
+    int year = localTime.wYear;
+
+    return year;
+}
+
+int AuxiliaryMethods::downloadCurrentMonth() {
+    SYSTEMTIME localTime;
+    GetLocalTime(&localTime);
+    int month = localTime.wMonth;
+
+    return month;
+}
+
+int AuxiliaryMethods::downloadYearFromOperationDate(string date)
+{
+    string year = date.substr( 0, 4);
+    int yearAsAnInteger;
+    istringstream strYear(year);
+    strYear >> yearAsAnInteger;
+
+    return yearAsAnInteger;
+}
+
+int AuxiliaryMethods::downloadMonthFromOperationDate(string date)
+{
+    string month = date.substr( 5, 2);
+    int monthAsAnInteger;
+    istringstream strMonth(month);
+    strMonth >> monthAsAnInteger;
+
+    return monthAsAnInteger;
+}
+
+
+
+
+
+
 
 

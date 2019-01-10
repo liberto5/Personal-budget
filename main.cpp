@@ -12,6 +12,7 @@ int main()
     personalBudget.signIn();
     //personalBudget.changePassword();
     //personalBudget.logOut();
-    personalBudget.addIncome();
-    personalBudget.addExpense();
+    //personalBudget.addIncome();
+    //personalBudget.addExpense();
+    personalBudget.showBalanceFromTheCurrentMonth();
 }
