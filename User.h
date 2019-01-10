@@ -4,8 +4,7 @@
 
 using namespace std;
 
-class User
-{
+class User {
     int userId;
     string login;
     string password;

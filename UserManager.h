@@ -19,6 +19,7 @@ public:
         loggedInUserId = 0;
         users = fileWithUsers.loadUsersFromFile();
     };
+
     void signUp();
     void displayAllUsers();
     void signIn();

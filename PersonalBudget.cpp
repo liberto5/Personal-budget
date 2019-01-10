@@ -1,7 +1,6 @@
 #include "PersonalBudget.h"
 
-bool PersonalBudget::isUserLoggedIn()
-{
+bool PersonalBudget::isUserLoggedIn() {
     userManager.isUserLoggedIn();
 }
 
@@ -48,7 +47,7 @@ void PersonalBudget::addExpense() {
     }
 }
 
-void PersonalBudget::showBalanceFromTheCurrentMonth(){
+void PersonalBudget::showBalanceFromTheCurrentMonth() {
     if (userManager.isUserLoggedIn()) {
         financialOperationsManager->showBalanceFromTheCurrentMonth();
     } else {
@@ -57,7 +56,7 @@ void PersonalBudget::showBalanceFromTheCurrentMonth(){
     }
 }
 
-void PersonalBudget::showBalanceFromThePreviousMonth(){
+void PersonalBudget::showBalanceFromThePreviousMonth() {
     if (userManager.isUserLoggedIn()) {
         financialOperationsManager->showBalanceFromThePreviousMonth();
     } else {
@@ -66,7 +65,7 @@ void PersonalBudget::showBalanceFromThePreviousMonth(){
     }
 }
 
-void PersonalBudget::showBalanceFromPeriod(){
+void PersonalBudget::showBalanceFromPeriod() {
     if (userManager.isUserLoggedIn()) {
         financialOperationsManager->showBalanceFromPeriod();
     } else {

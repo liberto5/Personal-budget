@@ -10,15 +10,16 @@
 using namespace std;
 
 class FileWithExpenses {
-    const string nameOfTheFileWithExpenses;
-    int idOfLastExpense;
     Expense expense;
     vector <Expense> expenses;
+    const string nameOfTheFileWithExpenses;
+    int idOfLastExpense;
 
 public:
     FileWithExpenses(string NAMEOFTHEFILEWITHEXPENSES) : nameOfTheFileWithExpenses(NAMEOFTHEFILEWITHEXPENSES) {
         idOfLastExpense = 0;
     };
+
     vector <Expense> loadExpensesOfLoggedInUserFromFile(int loggedInUserId);
     int getTheIdOfLastExpense();
     void addExpenseToFile(Expense expense);
