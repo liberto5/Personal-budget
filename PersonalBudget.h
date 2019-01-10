@@ -28,6 +28,7 @@ public:
     void logOut();
     void addIncome();
     void addExpense();
+    void showBalanceFromTheCurrentMonth();
 };
 
 #endif //PERSONALBUDGET_H

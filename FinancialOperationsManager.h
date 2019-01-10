@@ -3,6 +3,8 @@
 #include <iostream>
 #include <windows.h>
 #include <sstream>
+#include <vector>
+#include <algorithm>
 
 #include "Income.h"
 #include "Expense.h"
@@ -34,6 +36,7 @@ public:
     Income addDetailsOfTheIncome(string dateOfTheExpense);
     Expense addDetailsOfTheExpense(string dateOfTheExpense);
     string loadText();
+    void showBalanceFromTheCurrentMonth();
 };
 
 #endif //FINANCIALOPERATIONSMANAGER_H

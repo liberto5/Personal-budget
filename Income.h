@@ -10,6 +10,7 @@ class Income {
     string date;
     string item;
     int amount;
+    int dateAsUnixTime;
 
 public:
     void setIncomeId (int newIncomeId);
@@ -17,12 +18,16 @@ public:
     void setDate (string newDate);
     void setItem (string newItem);
     void setAmount (int newAmount);
+    void setDateAsUnixTime (int newDateAsUnixTime);
 
     int downloadIncomeId();
     int downloadUserId();
     string downloadDate();
     string downloadItem();
     int downloadAmount();
+    int downloadDateAsUnixTime() const;
 };
+
+bool operator<(const Income &i1, const Income &i2);
 
 #endif //INCOME_H
